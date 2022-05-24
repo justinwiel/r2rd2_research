@@ -16,13 +16,15 @@ simplefilter(action='ignore', category=FutureWarning)
 
 wav_loc = "wav_speech.wav"
 rate, data_old = wavfile.read(wav_loc)
-data = data_old / 32768
+# data = data_old / 32768
 
 noise_loc = "wav_noise.wav"
-noise_rate, noise_data = wavfile.read(noise_loc)
+# noise_rate, noise_data = wavfile.read(noise_loc)
 
 ## Fucntie om output te plotten en op te slaan
-def plot_fig(fig_name ,data , rate):
+def plot_fig(fig_name , wav_loc):
+    rate, data_old = wavfile.read(wav_loc)
+    data = data_old / 32768
     plot_name = fig_name
     IPython.display.Audio(data=data, rate=rate)
     fig_name = plt.figure(figsize=(20,4))
@@ -32,28 +34,28 @@ def plot_fig(fig_name ,data , rate):
     fig_name.savefig(f"{plot_name}")
     plt.clf()
 
-def write_to_wav(file_name , rate , data):
+def write_to_wav(file_name="output" , sample_rate=44100 , data=None):
     wav_with_noise = data*32768
-    wavfile.write(f"{file_name}.wav" , rate=rate ,data=wav_with_noise.astype(np.int16))
+    wavfile.write(f"{file_name}.wav" , rate=sample_rate ,data=wav_with_noise.astype(np.int16))
 
 
 
 ## Manually add Noise
-# output_noise_added , noise_clip = create_noise.add_noise_manually(data=data , rate=rate)
+# output_noise_added , noise_clip = create_noise.add_noise_manually(wav_loc=wav_loc)
 ## Write output of test with noise to wav file
 # write_to_wav(file_name='wav_with_noise' , rate=rate , data=output_noise_added)
 
 ## Add Noise through audio file
-output_noise_added , noise_clip = create_noise.add_noise_through_file(src_data=data , src_rate=rate, noise_data=noise_data )
+output_noise_added , noise_clip = create_noise.add_noise_through_file(wav_loc=wav_loc , noise_loc=noise_loc )
 ## Write output of test with noise to wav file
-write_to_wav(file_name='wav_with_noise' , rate=rate , data=output_noise_added)
+write_to_wav(file_name='wav_with_noise' , sample_rate=44100 , data=output_noise_added)
 
 
 ## Apply the fft algoritm to remove the noise from the given audio file
 output_with_noise_removal = fft_denoise().removeNoise(audio_clip=output_noise_added , noise_clip=noise_clip , verbose= False , visual=False, win_length=2048, hop_length=512 )
 
 ## Write output of result of noise removal to wav file
-write_to_wav(file_name='result_with_noise_removal' , rate=rate , data=output_with_noise_removal)
+write_to_wav(file_name='result_with_noise_removal' , sample_rate=44100 , data=output_with_noise_removal)
 
 
 ## Plot without Noise

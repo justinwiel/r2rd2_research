@@ -1,10 +1,13 @@
 import numpy as np
 import matplotlib.pyplot as plt
+from scipy.io import wavfile
 
 
 class create_noise:
     ## Functies om noise te adden   
-    def add_noise_manually(data , rate):
+    def add_noise_manually(wav_loc):
+        rate, data_old = wavfile.read(wav_loc)
+        data = data_old / 32768
         def fftnoise(f):
             f = np.array(f, dtype="complex")
             Np = (len(f) - 1) // 2
@@ -28,8 +31,10 @@ class create_noise:
         audio_clip_with_noise = data+noise
         return audio_clip_with_noise , noise_clip
 
-    def add_noise_through_file(src_data , src_rate , noise_data):
-        # src_data = np.concatenate((src_data, np.zeros(src_rate*3)))
+    def add_noise_through_file(wav_loc , noise_loc):
+        src_rate, src_data = wavfile.read(wav_loc)
+        src_data = src_data / 32768
+        noise_rate, noise_data = wavfile.read(noise_loc)
         # get some noise to add to the signal
         noise_to_add = noise_data[:len(src_data)]
         # get a different part of the noise clip for calculating statistics
