@@ -1,17 +1,17 @@
 {
       "word": {
-            "rights": 0,
-            "wrongs": 0,
-            "tests": 0
+            "rights": 3,
+            "wrongs": 2,
+            "tests": 5
       },
       "word1": {
-            "rights": 0,
-            "wrongs": 0,
-            "tests": 0
+            "rights": 4,
+            "wrongs": 7,
+            "tests": 11
       },
       "word2": {
-            "rights": 0,
-            "wrongs": 0,
-            "tests": 0
+            "rights": 4,
+            "wrongs": 3,
+            "tests": 7
       }
 }

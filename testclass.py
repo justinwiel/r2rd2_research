@@ -8,9 +8,7 @@ class test_data:
     def __init__(self) -> None:
         file = open("words.json")
         self.data = json.load(file)
-        self.api_return = [] #None TODO set to None when speech api is merged
-        for key, value in self.data.items(): #TODO remove this forloop when self.api_return is set to None
-            self.api_return.append(key)
+        self.api_return = ["word", "bla", "word2"] #None TODO set to None when speech api is merged
     #this function uses a speechrecognizer class and sets the api return variable 
     def api(self, api = True):
         pass
@@ -23,13 +21,18 @@ class test_data:
     def evaluate_api(self):
         if self.api_return is not None:
             self.word_counter = 0
+            total_correct = 0
             for key, value in self.data.items():
+                if self.word_counter >= len(self.api_return):
+                    break
                 if key == self.api_return[self.word_counter]:
                     value["rights"] +=1
+                    total_correct +=1
                 else:
                     value["wrongs"] += 1
                 value["tests"] += 1
                 self.word_counter += 1
+                print(total_correct/self.word_counter *100)
     #TODO function needs to be implemented 
     #this function reshapes audio files by adding a filter. 
     def add_filter(self):
@@ -67,6 +70,6 @@ class test_data:
 
 test = test_data()
 test.evaluate_api()
-test.reset_file()
-test.save()
+# test.reset_file()
+# test.save()
 test.show_results()
