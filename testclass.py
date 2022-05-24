@@ -1,7 +1,7 @@
 import json
 import matplotlib.pyplot as plt
 import numpy as np
-
+from SpeechAPI import SpeechToText
 #class to test and evaluate data 
 class test_data:
     #initializer for the class. it also loads the data from words.json
@@ -10,13 +10,13 @@ class test_data:
         self.data = json.load(file)
         self.api_return = ["word", "bla", "word2"] #None TODO set to None when speech api is merged
     #this function uses a speechrecognizer class and sets the api return variable 
-    def api(self, api = True, audiofile = None):
+    def api(self, api = True, audiofile = None): #param api: True is google False is sphinx
         pass
-        recog = None #SpeechToText TODO fix this when github is merged! 
+        recog = SpeechToText()
         if api:
-            self.api_return = recog.google_api(audiofile)
+            self.api_return = recog.google_api(audio_file=audiofile)
         else:
-            self.api_return = recog.api(audiofile)
+            self.api_return = recog.sphinx_api(audio_file=audiofile)
     #this function evaluates the api return variable with the words in the json. 
     def evaluate_api(self):
         if self.api_return is not None:
@@ -69,6 +69,7 @@ class test_data:
         plt.show()
 
 test = test_data()
+test.api(1, "testEN.wav")
 test.evaluate_api()
 # test.reset_file()
 # test.save()
