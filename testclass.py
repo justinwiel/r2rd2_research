@@ -10,13 +10,13 @@ class test_data:
         self.data = json.load(file)
         self.api_return = ["word", "bla", "word2"] #None TODO set to None when speech api is merged
     #this function uses a speechrecognizer class and sets the api return variable 
-    def api(self, api = True):
+    def api(self, api = True, audiofile = None):
         pass
         recog = None #SpeechToText TODO fix this when github is merged! 
         if api:
-            self.api_return = recog.google_api(language = "Dutch")
+            self.api_return = recog.google_api(audiofile)
         else:
-            self.api_return = recog.api()
+            self.api_return = recog.api(audiofile)
     #this function evaluates the api return variable with the words in the json. 
     def evaluate_api(self):
         if self.api_return is not None:
@@ -35,8 +35,8 @@ class test_data:
                 print(total_correct/self.word_counter *100)
     #TODO function needs to be implemented 
     #this function reshapes audio files by adding a filter. 
-    def add_filter(self):
-        pass
+    def add_filter(self, filter_nmr, audiofile):
+        return audiofile
     #this function saves the updated dictionary and saves them in words.json
     def save(self):
         file = open("words.json", "w")
