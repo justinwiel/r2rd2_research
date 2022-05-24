@@ -14,8 +14,8 @@ class melFilter:
         self.y, sampling_rate = librosa.load(path)
         self.org = copy.deepcopy(self.y)
         self.Spectogram = librosa.feature.melspectrogram(y=self.y)
-        self.SpectogramFilt = librosa.feature.melspectrogram(y=self.y, sr=sampling_rate,n_fft=2048, n_mels=128, fmax=1000,  norm="slaney")
-        self.y = librosa.feature.inverse.mel_to_audio(self.SpectogramFilt,sr=sampling_rate,n_fft=2048, fmax=1000,  norm="slaney")
+        self.SpectogramFilt = librosa.feature.melspectrogram(y=self.y, sr=sampling_rate,n_fft=2048, n_mels=128, fmax=900,  norm="slaney")
+        self.y = librosa.feature.inverse.mel_to_audio(self.SpectogramFilt,sr=sampling_rate,n_fft=2048, fmax=900,  norm="slaney")
         write('test.wav',rate = sampling_rate, data = self.y*10)
     def plot(self):
 
