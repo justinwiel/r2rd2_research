@@ -8,7 +8,7 @@ class test_data:
     def __init__(self) -> None:
         file = open("words.json")
         self.data = json.load(file)
-        self.api_return = ["word", "bla", "word2"] #None TODO set to None when speech api is merged
+        self.api_return = None 
     #this function uses a speechrecognizer class and sets the api return variable 
     def api(self, api = True, audiofile = None): #param api: True is google False is sphinx
         pass
@@ -72,5 +72,5 @@ test = test_data()
 test.api(1, "testEN.wav")
 test.evaluate_api()
 # test.reset_file()
-# test.save()
+test.save()
 test.show_results()
