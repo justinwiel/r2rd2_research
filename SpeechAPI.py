@@ -18,8 +18,9 @@ class SpeechToText:
                 audio_data = r.record(source)
                 print("File loading sphinx... ")
                 text = r.recognize_sphinx(audio_data)
+                text.lower()
+                print(text.split())
                 return text.split()
 
 # sp = SpeechToText()
-# sp.google_api(audio_file="r2rd2_research/testEN.wav")
-# sp.sphinx_api(audio_file="r2rd2_research/testEN.wav")
+

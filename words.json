@@ -9,9 +9,9 @@
             "wrongs": 0,
             "tests": 1
       },
-      "charley": {
-            "rights": 0,
-            "wrongs": 1,
+      "charlie": {
+            "rights": 1,
+            "wrongs": 0,
             "tests": 1
       },
       "delta": {
@@ -44,9 +44,9 @@
             "wrongs": 0,
             "tests": 1
       },
-      "julliet": {
-            "rights": 0,
-            "wrongs": 1,
+      "juliet": {
+            "rights": 1,
+            "wrongs": 0,
             "tests": 1
       },
       "kilo": {
@@ -79,52 +79,52 @@
             "wrongs": 0,
             "tests": 1
       },
-      "Quebec": {
+      "quebec": {
             "rights": 0,
             "wrongs": 1,
             "tests": 1
       },
-      "Romeo": {
+      "romeo": {
             "rights": 0,
             "wrongs": 1,
             "tests": 1
       },
-      "Sierra": {
+      "sierra": {
             "rights": 0,
             "wrongs": 1,
             "tests": 1
       },
-      "Tango": {
+      "tango": {
             "rights": 0,
             "wrongs": 1,
             "tests": 1
       },
-      "Uniform": {
+      "uniform": {
             "rights": 0,
             "wrongs": 1,
             "tests": 1
       },
-      "Victor": {
+      "victor": {
             "rights": 0,
             "wrongs": 1,
             "tests": 1
       },
-      "Whiskey": {
+      "whiskey": {
             "rights": 0,
             "wrongs": 0,
             "tests": 0
       },
-      "X-ray": {
+      "x-ray": {
             "rights": 0,
             "wrongs": 0,
             "tests": 0
       },
-      "Yankee": {
+      "yankee": {
             "rights": 0,
             "wrongs": 0,
             "tests": 0
       },
-      "Zulu": {
+      "zulu": {
             "rights": 0,
             "wrongs": 0,
             "tests": 0
