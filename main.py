@@ -3,7 +3,8 @@ import matplotlib.pyplot as plt
 import matplotlib
 import numpy as np
 from SpeechAPI import SpeechToText
-
+from fft_denoise import fft_denoise
+from librosa_mel import *
 matplotlib.use('TkAgg')
 #class to test and evaluate data 
 class test_data:
@@ -13,13 +14,13 @@ class test_data:
         self.data = json.load(file)
         self.api_return = None 
     #this function uses a speechrecognizer class and sets the api return variable 
-    def api(self, api = True, audiofile = None): #param api: True is google False is sphinx
+    def api(self, api = True, path = None): #param api: True is google False is sphinx
         pass
         recog = SpeechToText()
         if api:
-            self.api_return = recog.google_api(audio_file=audiofile)
+            self.api_return = recog.google_api(audio_file=path)
         else:
-            self.api_return = recog.sphinx_api(audio_file=audiofile)
+            self.api_return = recog.sphinx_api(audio_file=path)
     #this function evaluates the api return variable with the words in the json. 
     def evaluate_api(self):
         if self.api_return is not None:
@@ -27,7 +28,9 @@ class test_data:
             total_correct = 0
             for key, value in self.data.items():
                 if self.word_counter >= len(self.api_return):
-                    break
+                    value["wrongs"] += 1
+                    value["tests"] += 1
+                    continue
                 if key == self.api_return[self.word_counter].lower():
                     value["rights"] +=1
                     total_correct +=1
@@ -36,10 +39,25 @@ class test_data:
                 value["tests"] += 1
                 self.word_counter += 1
             print(total_correct/self.word_counter *100)
+
+    def add_noise(self, file_path, noise_path):
+        #TODO needs to be implemented
+        pass
+
     #TODO function needs to be implemented 
     #this function reshapes audio files by adding a filter. 
-    def add_filter(self, filter_nmr, audiofile):
-        return audiofile
+    def add_filter(self, filter_nmr, path):
+        if filter_nmr == 0: #Mel filter
+            filter = melFilter()
+            new_path = filter.filterMel(path)
+        elif filter_nmr == 1: #scipy denoise
+            filter = fft_denoise()
+            new_path = filter.removeNoise(path)
+        else: # python noise reduction
+            filter = None
+            new_path = filter #TODO add filter
+        return new_path
+        
     #this function saves the updated dictionary and saves them in words.json
     def save(self):
         file = open("words.json", "w")
@@ -78,7 +96,7 @@ class test_data:
 
 test = test_data()
 test.reset_file()
-test.api(1, "test_sample.wav")
+# test.api(1, "test_sample.wav")
 test.evaluate_api()
 test.save()
 test.show_results()
