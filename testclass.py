@@ -69,7 +69,7 @@ class test_data:
         plt.show()
 
 test = test_data()
-test.api(1, "testEN.wav")
+# test.api(1, "testEN.wav")
 test.evaluate_api()
 # test.reset_file()
 test.save()
