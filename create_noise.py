@@ -2,12 +2,13 @@ import numpy as np
 import matplotlib.pyplot as plt
 from scipy.io import wavfile
 
+from write_to_wav import write_to_wav
 
 class create_noise:
     ## Functies om noise te adden   
-    def add_noise_manually(wav_loc):
-        rate, data_old = wavfile.read(wav_loc)
-        data = data_old / 32768
+    def add_noise_manually(wav_loc , output_filename="wav_with_noise.wav"):
+        src_rate, src_data = wavfile.read(wav_loc)
+        src_data = src_data / 32768
         def fftnoise(f):
             f = np.array(f, dtype="complex")
             Np = (len(f) - 1) // 2
@@ -26,12 +27,14 @@ class create_noise:
 
         ## Add noise to existing data
         noise_len = 2 # seconds
-        noise = band_limited_noise(min_freq=4000, max_freq = 12000, samples=len(data), samplerate=rate)*10
-        noise_clip = noise[:rate*noise_len]
-        audio_clip_with_noise = data+noise
-        return audio_clip_with_noise , noise_clip
+        noise = band_limited_noise(min_freq=4000, max_freq = 12000, samples=len(src_data), samplerate=src_rate)*10
+        noise_clip = noise[:src_rate*noise_len]
+        audio_clip_with_noise = src_data+noise
 
-    def add_noise_through_file(wav_loc , noise_loc):
+        write_to_wav(file_name=output_filename , sample_rate=src_rate, data=audio_clip_with_noise)
+        return output_filename
+
+    def add_noise_through_file(wav_loc , noise_loc , output_filename="wav_with_noise.wav"):
         src_rate, src_data = wavfile.read(wav_loc)
         src_data = src_data / 32768
         noise_rate, noise_data = wavfile.read(noise_loc)
@@ -46,4 +49,6 @@ class create_noise:
 
         audio_clip_with_noise = src_data + noise_to_add / snr
         noise_clip = noise_clip / snr
-        return audio_clip_with_noise , noise_clip
+
+        write_to_wav(file_name=output_filename, sample_rate=src_rate, data=audio_clip_with_noise)
+        return output_filename
