@@ -1,7 +1,10 @@
 import json
 import matplotlib.pyplot as plt
+import matplotlib
 import numpy as np
 from SpeechAPI import SpeechToText
+
+matplotlib.use('TkAgg')
 #class to test and evaluate data 
 class test_data:
     #initializer for the class. it also loads the data from words.json
@@ -58,6 +61,7 @@ class test_data:
             keys.append(key)
         
         X_axis = np.arange(len(keys))
+        plt.switch_backend('TkAgg')
         plt.rcParams["figure.figsize"] = [7.00, 3.50]
         plt.rcParams["figure.autolayout"] = True
         plt.bar(X_axis-0.2, rights, 0.2, label = "Number of correctly recognized words", color="green")
