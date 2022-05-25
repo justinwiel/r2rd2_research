@@ -85,44 +85,44 @@
             "tests": 1
       },
       "romeo": {
-            "rights": 0,
-            "wrongs": 1,
+            "rights": 1,
+            "wrongs": 0,
             "tests": 1
       },
       "sierra": {
-            "rights": 0,
-            "wrongs": 1,
+            "rights": 1,
+            "wrongs": 0,
             "tests": 1
       },
       "tango": {
-            "rights": 0,
-            "wrongs": 1,
+            "rights": 1,
+            "wrongs": 0,
             "tests": 1
       },
       "uniform": {
-            "rights": 0,
-            "wrongs": 1,
+            "rights": 1,
+            "wrongs": 0,
             "tests": 1
       },
       "victor": {
-            "rights": 0,
-            "wrongs": 1,
+            "rights": 1,
+            "wrongs": 0,
             "tests": 1
       },
       "whiskey": {
             "rights": 0,
-            "wrongs": 0,
-            "tests": 0
+            "wrongs": 1,
+            "tests": 1
       },
       "x-ray": {
-            "rights": 0,
+            "rights": 1,
             "wrongs": 0,
-            "tests": 0
+            "tests": 1
       },
       "yankee": {
-            "rights": 0,
+            "rights": 1,
             "wrongs": 0,
-            "tests": 0
+            "tests": 1
       },
       "zulu": {
             "rights": 0,

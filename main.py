@@ -3,7 +3,6 @@ import matplotlib.pyplot as plt
 import matplotlib
 import numpy as np
 from SpeechAPI import SpeechToText
-
 matplotlib.use('TkAgg')
 #class to test and evaluate data 
 class test_data:
@@ -78,7 +77,7 @@ class test_data:
 
 test = test_data()
 test.reset_file()
-test.api(1, "test_sample.wav")
+test.api(1, "alphabetRay.wav")
 test.evaluate_api()
 test.save()
 test.show_results()
