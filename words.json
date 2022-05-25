@@ -1,113 +1,113 @@
 {
       "alpha": {
-            "rights": 0,
+            "rights": 1,
             "wrongs": 0,
-            "tests": 0
+            "tests": 1
       },
       "bravo": {
-            "rights": 0,
+            "rights": 1,
             "wrongs": 0,
-            "tests": 0
+            "tests": 1
       },
       "charley": {
             "rights": 0,
-            "wrongs": 0,
-            "tests": 0
+            "wrongs": 1,
+            "tests": 1
       },
       "delta": {
-            "rights": 0,
+            "rights": 1,
             "wrongs": 0,
-            "tests": 0
+            "tests": 1
       },
       "echo": {
-            "rights": 0,
+            "rights": 1,
             "wrongs": 0,
-            "tests": 0
+            "tests": 1
       },
       "foxtrot": {
-            "rights": 0,
+            "rights": 1,
             "wrongs": 0,
-            "tests": 0
+            "tests": 1
       },
       "golf": {
-            "rights": 0,
+            "rights": 1,
             "wrongs": 0,
-            "tests": 0
+            "tests": 1
       },
       "hotel": {
-            "rights": 0,
+            "rights": 1,
             "wrongs": 0,
-            "tests": 0
+            "tests": 1
       },
       "india": {
-            "rights": 0,
+            "rights": 1,
             "wrongs": 0,
-            "tests": 0
+            "tests": 1
       },
       "julliet": {
             "rights": 0,
-            "wrongs": 0,
-            "tests": 0
+            "wrongs": 1,
+            "tests": 1
       },
       "kilo": {
-            "rights": 0,
+            "rights": 1,
             "wrongs": 0,
-            "tests": 0
+            "tests": 1
       },
       "lima": {
-            "rights": 0,
+            "rights": 1,
             "wrongs": 0,
-            "tests": 0
+            "tests": 1
       },
       "mike": {
-            "rights": 0,
+            "rights": 1,
             "wrongs": 0,
-            "tests": 0
+            "tests": 1
       },
       "november": {
-            "rights": 0,
+            "rights": 1,
             "wrongs": 0,
-            "tests": 0
+            "tests": 1
       },
       "oscar": {
-            "rights": 0,
+            "rights": 1,
             "wrongs": 0,
-            "tests": 0
+            "tests": 1
       },
       "papa": {
-            "rights": 0,
+            "rights": 1,
             "wrongs": 0,
-            "tests": 0
+            "tests": 1
       },
       "Quebec": {
             "rights": 0,
-            "wrongs": 0,
-            "tests": 0
+            "wrongs": 1,
+            "tests": 1
       },
       "Romeo": {
             "rights": 0,
-            "wrongs": 0,
-            "tests": 0
+            "wrongs": 1,
+            "tests": 1
       },
       "Sierra": {
             "rights": 0,
-            "wrongs": 0,
-            "tests": 0
+            "wrongs": 1,
+            "tests": 1
       },
       "Tango": {
             "rights": 0,
-            "wrongs": 0,
-            "tests": 0
+            "wrongs": 1,
+            "tests": 1
       },
       "Uniform": {
             "rights": 0,
-            "wrongs": 0,
-            "tests": 0
+            "wrongs": 1,
+            "tests": 1
       },
       "Victor": {
             "rights": 0,
-            "wrongs": 0,
-            "tests": 0
+            "wrongs": 1,
+            "tests": 1
       },
       "Whiskey": {
             "rights": 0,

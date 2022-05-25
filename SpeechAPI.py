@@ -8,6 +8,8 @@ class SpeechToText:
                 audio_data = r.record(source)
                 print("File loading google... ")
                 text = r.recognize_google(audio_data, language="en-US")
+                text.lower()
+                print(text.split())
                 return text.split()
     
     def sphinx_api(self,*,audio_file):
