@@ -3,8 +3,11 @@ import matplotlib.pyplot as plt
 import matplotlib
 import numpy as np
 from SpeechAPI import SpeechToText
-# from fft_denoise import fft_denoise
-# from librosa_mel import *
+from fft_denoise import fft_denoise #fft filter
+from librosa_mel import melFilter 
+from Noise_reduction import NoiseReduce
+from create_noise import create_noise
+
 matplotlib.use('TkAgg')
 #class to test and evaluate data 
 class test_data:
@@ -37,21 +40,22 @@ class test_data:
             print(total_correct/self.word_counter *100)
 
     def add_noise(self, file_path, noise_path):
-        #TODO needs to be implemented
-        pass
+        return create_noise.add_noise_through_file(file_path, noise_path)
 
-    #TODO function needs to be implemented 
     #this function reshapes audio files by adding a filter. 
-    def add_filter(self, filter_nmr, path):
+    def add_filter(self, filter_nmr, path, noise_loc = None):
         if filter_nmr == 0: #Mel filter
-            # filter = melFilter()
-            new_path = filter.filterMel(path)
+            filter = melFilter()
+            new_path = filter.filterMel(path=path)
         elif filter_nmr == 1: #scipy denoise
-            # filter = fft_denoise()
-            new_path = filter.removeNoise(path)
+            filter = fft_denoise()
+            if noise_loc != None:
+                new_path = filter.removeNoise(path, noise_loc)
+            else:
+                raise Exception("Needs noise location for fft denoise filter.")
         else: # python noise reduction
-            filter = None
-            new_path = filter #TODO add filter
+            filter = NoiseReduce()
+            new_path = filter.reduce_noise(path)
         return new_path
         
     #this function saves the updated dictionary and saves them in words.json
@@ -62,7 +66,6 @@ class test_data:
     def reset_file(self):
         for key, value in self.data.items():
             value["rights"] = 0
-            value["wrongs"] = 0
             value["tests"] = 0
 
     #this function shows the results in a bar type 

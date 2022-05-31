@@ -40,6 +40,7 @@ class NoiseReduce:
         plt.show()
         IPython.display.Audio(data=self.audio_clip_cafe, rate=noise_rate)
         return self.audio_clip_cafe, self.rate, self.noise_clip
+
     #Function to reduce noise from two merged wav files.
     def reduce_noise(self, file_loc):
         audio_file, rate = sf.read(file_loc)
@@ -54,11 +55,10 @@ class NoiseReduce:
 
         NoiseReduce.write_to_wav("noisereduced_result.wav",
                      sample_rate=44100, data=reduced_noise)
-        return reduced_noise
+        return "noisereduced_result.wav"
 
-noise_reduced = NoiseReduce()
-
-noise_reduced.merge_noise_to_file()
-noise_reduced.reduce_noise("assets_fish.wav")
+# noise_reduced = NoiseReduce()
+# noise_reduced.merge_noise_to_file()
+# noise_reduced.reduce_noise("assets_fish.wav")
 
     
