@@ -28,7 +28,7 @@ class test_data:
             total_correct = 0
             for i in range(len(self.api_return)):
                 for key, value in self.data.items():
-                    if key == self.api_return[i]:
+                    if key == self.api_return[i].lower():
                         value["rights"] += 1
                         total_correct+=1
                 self.word_counter+=1
@@ -67,10 +67,9 @@ class test_data:
 
     #this function shows the results in a bar type 
     def show_results(self):
-        keys, rights, wrongs, tests = [], [], [], []
+        keys, rights, tests = [], [], []
         for key, value in self.data.items():
             rights.append(value["rights"])
-            wrongs.append(value["wrongs"])
             tests.append(value["tests"])
             keys.append(key)
         
@@ -78,9 +77,8 @@ class test_data:
         plt.switch_backend('TkAgg')
         plt.rcParams["figure.figsize"] = [7.00, 3.50]
         plt.rcParams["figure.autolayout"] = True
-        plt.bar(X_axis-0.2, rights, 0.2, label = "Number of correctly recognized words", color="green")
-        plt.bar(X_axis, wrongs, 0.2,  label = "Number of misrecognized words", color="red")
-        plt.bar(X_axis + 0.2, tests, 0.2,  label = "Amount of tests", color="blue")
+        plt.bar(X_axis-0.1, rights, 0.2, label = "Number of correctly recognized words", color="green")
+        plt.bar(X_axis + 0.1, tests, 0.2,  label = "Amount of tests", color="blue")
         plt.xticks(X_axis, keys , fontsize=7)
         plt.xlabel("Words")
         plt.ylabel("Amount")
