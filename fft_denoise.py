@@ -7,6 +7,8 @@ import librosa
 import time
 from datetime import timedelta as td
 
+from write_to_wav import write_to_wav
+
 
 class fft_denoise:
     def __init__(self) -> None:
@@ -26,6 +28,18 @@ class fft_denoise:
     def _db_to_amp(self,x,):
         return librosa.core.db_to_amplitude(x, ref=1.0)
 
+    ## Fucntie om output te plotten en op te slaan
+    def plot_fig(self, fig_name , wav_loc):
+        rate, data_old = wavfile.read(wav_loc)
+        data = data_old / 32768
+        plot_name = fig_name
+        IPython.display.Audio(data=data, rate=rate)
+        fig_name = plt.figure(figsize=(20,4))
+        ax1 = fig_name.add_subplot(111)
+        ax1.plot(data)
+        # plt.show()
+        fig_name.savefig(f"{plot_name}")
+        plt.clf()
 
     def plot_spectrogram(self, signal, title):
         fig, ax = plt.subplots(figsize=(20, 4))
@@ -60,8 +74,8 @@ class fft_denoise:
 
     def removeNoise(
         self,
-        audio_clip,
-        noise_clip,
+        audio_loc,
+        noise_loc,
         n_grad_freq=2,
         n_grad_time=4,
         n_fft=2048,
@@ -71,6 +85,7 @@ class fft_denoise:
         prop_decrease=1.0,
         verbose=False,
         visual=False,
+        output_filename='result_with_noise_removal.wav'
     ):
         """Remove noise from audio based upon a clip containing only noise
 
@@ -90,6 +105,9 @@ class fft_denoise:
             array: The recovered signal with noise subtracted
 
         """
+        audio_clip , audio_rate  = librosa.load(audio_loc)
+        noise_clip , noise_rate = librosa.load(noise_loc)
+        print(type(audio_clip))
         if verbose:
             start = time.time()
         # STFT over noise
@@ -179,4 +197,6 @@ class fft_denoise:
             self.plot_spectrogram(sig_stft_db_masked, title="Masked signal")
         if visual:
             self.plot_spectrogram(recovered_spec, title="Recovered spectrogram")
-        return recovered_signal
+
+        write_to_wav(file_name=output_filename , sample_rate=audio_rate, data=recovered_signal)
+        return output_filename            
