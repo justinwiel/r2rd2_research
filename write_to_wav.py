@@ -4,7 +4,7 @@ import scipy.signal
 import numpy as np
 import matplotlib.pyplot as plt
 import librosa
+from soundfile import write
 
 def write_to_wav(file_name="output" , sample_rate=44100 , data=None):
-    wav_with_noise = data*32768
-    wavfile.write(f"{file_name}" , rate=sample_rate ,data=wav_with_noise.astype(np.int16))
+    write(file=f"{file_name}" , data= data , samplerate=sample_rate )

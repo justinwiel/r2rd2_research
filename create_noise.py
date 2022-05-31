@@ -1,14 +1,14 @@
 import numpy as np
 import matplotlib.pyplot as plt
+import librosa 
 from scipy.io import wavfile
 
 from write_to_wav import write_to_wav
 
 class create_noise:
     ## Functies om noise te adden   
-    def add_noise_manually(wav_loc , output_filename="wav_with_noise.wav"):
-        src_rate, src_data = wavfile.read(wav_loc)
-        src_data = src_data / 32768
+    def add_noise_manually(wav_loc):
+        src_data , src_rate = librosa.load(f"src\\Original\\{wav_loc}")
         def fftnoise(f):
             f = np.array(f, dtype="complex")
             Np = (len(f) - 1) // 2
@@ -31,17 +31,17 @@ class create_noise:
         noise_clip = noise[:src_rate*noise_len]
         audio_clip_with_noise = src_data+noise
 
-        write_to_wav(file_name=output_filename , sample_rate=src_rate, data=audio_clip_with_noise)
+        output_filename = f"{wav_loc.partition('.')[0]}_manual_noise.wav"
+        write_to_wav(file_name=f"src\\Original_With_Noise\\{output_filename}" , sample_rate=src_rate, data=audio_clip_with_noise)
         return output_filename
 
-    def add_noise_through_file(wav_loc , noise_loc , output_filename="wav_with_noise.wav"):
-        src_rate, src_data = wavfile.read(wav_loc)
-        src_data = src_data / 32768
-        noise_rate, noise_data = wavfile.read(noise_loc)
+    def add_noise_through_file(wav_loc , noise_loc):
+        src_data , src_rate = librosa.load(f"src\\Original\\{wav_loc}")
+        noise_data, noise_rate = librosa.load(f"src\\Noise_Samples\\{noise_loc}")
         # get some noise to add to the signal
         noise_to_add = noise_data[:len(src_data)]
         # get a different part of the noise clip for calculating statistics
-        noise_clip = noise_data[: len(src_data)]
+        noise_clip = noise_data[:len(src_data)]
         noise_clip = noise_clip / max(noise_to_add)
         noise_to_add = noise_to_add / max(noise_to_add)
 
@@ -50,5 +50,6 @@ class create_noise:
         audio_clip_with_noise = src_data + noise_to_add / snr
         noise_clip = noise_clip / snr
 
-        write_to_wav(file_name=output_filename, sample_rate=src_rate, data=audio_clip_with_noise)
+        output_filename = f"{wav_loc.partition('.')[0]}_{noise_loc.partition('.')[0]}.wav"
+        write_to_wav(file_name=f"src\\Original_With_Noise\\{output_filename}", sample_rate=src_rate, data=audio_clip_with_noise)
         return output_filename

@@ -64,7 +64,7 @@
             "tests": 1
       },
       "quebec": {
-            "rights": 1,
+            "rights": 0,
             "tests": 1
       },
       "romeo": {
@@ -84,11 +84,11 @@
             "tests": 1
       },
       "victor": {
-            "rights": 1,
+            "rights": 0,
             "tests": 1
       },
       "whiskey": {
-            "rights": 1,
+            "rights": 0,
             "tests": 1
       },
       "x-ray": {

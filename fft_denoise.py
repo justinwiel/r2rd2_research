@@ -74,7 +74,7 @@ class fft_denoise:
 
     def removeNoise(
         self,
-        audio_loc,
+        wav_loc,
         noise_loc,
         n_grad_freq=2,
         n_grad_time=4,
@@ -105,9 +105,8 @@ class fft_denoise:
             array: The recovered signal with noise subtracted
 
         """
-        audio_clip , audio_rate  = librosa.load(audio_loc)
-        noise_clip , noise_rate = librosa.load(noise_loc)
-        print(type(audio_clip))
+        audio_clip , audio_rate  = librosa.load(f"src\\Original_With_Noise\\{wav_loc}")
+        noise_clip , noise_rate = librosa.load(f"src\\Noise_Samples\\{noise_loc}")
         if verbose:
             start = time.time()
         # STFT over noise
@@ -198,5 +197,6 @@ class fft_denoise:
         if visual:
             self.plot_spectrogram(recovered_spec, title="Recovered spectrogram")
 
-        write_to_wav(file_name=output_filename , sample_rate=audio_rate, data=recovered_signal)
-        return output_filename            
+        output_filename = wav_loc.partition('.')[0]
+        write_to_wav(file_name=f"src\\Output_Noise_Filtered\\{output_filename}_fft_filtered.wav" , sample_rate=audio_rate, data=recovered_signal)
+        return f"{output_filename}_fft_filtered.wav"            
