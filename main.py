@@ -3,8 +3,8 @@ import matplotlib.pyplot as plt
 import matplotlib
 import numpy as np
 from SpeechAPI import SpeechToText
-from fft_denoise import fft_denoise
-from librosa_mel import *
+# from fft_denoise import fft_denoise
+# from librosa_mel import *
 matplotlib.use('TkAgg')
 #class to test and evaluate data 
 class test_data:
@@ -12,7 +12,7 @@ class test_data:
     def __init__(self) -> None:
         file = open("words.json")
         self.data = json.load(file)
-        self.api_return = None 
+        self.api_return = None
     #this function uses a speechrecognizer class and sets the api return variable 
     def api(self, api = True, path = None): #param api: True is google False is sphinx
         pass
@@ -26,18 +26,14 @@ class test_data:
         if self.api_return is not None:
             self.word_counter = 0
             total_correct = 0
+            for i in range(len(self.api_return)):
+                for key, value in self.data.items():
+                    if key == self.api_return[i]:
+                        value["rights"] += 1
+                        total_correct+=1
+                self.word_counter+=1
             for key, value in self.data.items():
-                if self.word_counter >= len(self.api_return):
-                    value["wrongs"] += 1
-                    value["tests"] += 1
-                    continue
-                if key == self.api_return[self.word_counter].lower():
-                    value["rights"] +=1
-                    total_correct +=1
-                else:
-                    value["wrongs"] += 1
-                value["tests"] += 1
-                self.word_counter += 1
+                value["tests"] +=1
             print(total_correct/self.word_counter *100)
 
     def add_noise(self, file_path, noise_path):
@@ -48,10 +44,10 @@ class test_data:
     #this function reshapes audio files by adding a filter. 
     def add_filter(self, filter_nmr, path):
         if filter_nmr == 0: #Mel filter
-            filter = melFilter()
+            # filter = melFilter()
             new_path = filter.filterMel(path)
         elif filter_nmr == 1: #scipy denoise
-            filter = fft_denoise()
+            # filter = fft_denoise()
             new_path = filter.removeNoise(path)
         else: # python noise reduction
             filter = None
@@ -96,7 +92,7 @@ class test_data:
 
 test = test_data()
 test.reset_file()
-# test.api(1, "test_sample.wav")
+test.api(1, "test_sample.wav")
 test.evaluate_api()
 test.save()
 test.show_results()
