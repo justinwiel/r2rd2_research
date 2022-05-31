@@ -16,7 +16,9 @@ class melFilter:
         self.Spectogram = librosa.feature.melspectrogram(y=self.y)
         self.SpectogramFilt = librosa.feature.melspectrogram(y=self.y, sr=sampling_rate,n_fft=2048, n_mels=128, fmax=sampling_rate/2,  norm="slaney",power=4.3)
         self.y = librosa.feature.inverse.mel_to_audio(self.SpectogramFilt,sr=sampling_rate,n_fft=2048, fmax=sampling_rate/2,  norm="slaney")
-        write(file= "test.wav",data =self.y*0.25,samplerate=sampling_rate)
+        save_file = "test.wav"
+        write(file=save_file ,data =self.y*0.25,samplerate=sampling_rate)
+        return save_file
     def plot(self):
 
         fig,ax = plt.subplots(nrows =4 )
