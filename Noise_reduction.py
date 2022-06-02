@@ -31,7 +31,7 @@ class NoiseReduce:
         plt.show()
         IPython.display.Audio(data=noise_data, rate=noise_rate)
 
-        snr = 2  # signal to noise ratio
+        snr = 2  # signal to noise ratio.
         self.noise_clip = noise_data/snr
         self.audio_clip_cafe = data + self.noise_clip
 
@@ -51,7 +51,7 @@ class NoiseReduce:
         ax.plot(reduced_noise)
         plt.show()
         IPython.display.Audio(data=reduced_noise, rate=self.rate)
-
+        # write the reduced noise audio to a new file. 
         NoiseReduce.write_to_wav("noisereduced_result.wav",
                      sample_rate=44100, data=reduced_noise)
         return reduced_noise
