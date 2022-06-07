@@ -14,11 +14,11 @@ class melFilter:
         self.y, sampling_rate = librosa.load(f"src\\Original_With_Noise\\{path}")
         self.org = copy.deepcopy(self.y)
         self.Spectogram = librosa.feature.melspectrogram(y=self.y)
-        self.SpectogramFilt = librosa.feature.melspectrogram(y=self.y, sr=sampling_rate,n_fft=2048, n_mels=128, fmax=sampling_rate/2,  norm="slaney",power=4.3)
+        self.SpectogramFilt = librosa.feature.melspectrogram(y=self.y, sr=sampling_rate,n_fft=2048, n_mels=128, fmax=sampling_rate/2,  norm="slaney",power=2)
         self.y = librosa.feature.inverse.mel_to_audio(self.SpectogramFilt,sr=sampling_rate,n_fft=2048, fmax=sampling_rate/2,  norm="slaney")
         output_filename = path.partition('.')[0]
         write(file= f"src\\Output_Noise_Filtered\\{output_filename}_mel_filtered.wav",data =self.y*0.25,samplerate=sampling_rate)
-        return f"{output_filename}_fft_filtered.wav"    
+        return f"{output_filename}_mel_filtered.wav"    
 
     def plot(self):
         fig,ax = plt.subplots(nrows =4 )
