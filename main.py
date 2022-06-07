@@ -1,10 +1,11 @@
+import os
 import json
 import matplotlib.pyplot as plt
 import matplotlib
 import numpy as np
 from SpeechAPI import SpeechToText
 from fft_denoise import fft_denoise
-# from librosa_mel import *
+from librosa_mel import *
 from create_noise import *
 from write_to_wav import write_to_wav
 matplotlib.use('TkAgg')
@@ -46,7 +47,7 @@ class test_data:
     #this function reshapes audio files by adding a filter. 
     def add_filter(self, filter_nmr, wav_loc , noise_loc):
         if filter_nmr == 0: #Mel filter
-            # filter = melFilter()
+            filter = melFilter()
             new_path = filter.filterMel(wav_loc)
         elif filter_nmr == 1: #scipy denoise
             filter = fft_denoise()
@@ -90,17 +91,21 @@ class test_data:
         plt.show()
 
 test = test_data()
+list_of_files = os.listdir("src\\Original") #pas aan naar de folder waar de te evalueren files staan
 test.reset_file()
-test.api(1, "src\\Original\\sample_male_1.wav")
-test.evaluate_api()
-test.save()
+for file in list_of_files:
+    test.api(0, f"src\\Original\\{file}") #pas aan naar de folder waar de te evalueren files staan
+    test.evaluate_api()
+    test.save()
 test.show_results()
 
-test.reset_file()
+# test.api(1, "src\\Original\\sample_male_1.wav")
+# test.evaluate_api()
+# test.save()
+# test.show_results()
+
+# test.reset_file()
 # test.add_noise("sample_male_1.wav")
-filter = test.add_filter(1, "sample_male_1_noise_café.wav" , "noise_café.wav")
-print(filter)
-test.api(1, f"src\\Output_Noise_Filtered\\{filter}")
-test.evaluate_api()
-test.save()
-test.show_results()
+# filter = test.add_filter(0, "sample_male_1_noise_café.wav" , "noise_café.wav")
+# print(filter)
+
