@@ -21,7 +21,7 @@ class NoiseReduce:
         output_filename = wav_loc.partition('.')[0]
         write_to_wav(f"src\\Output_Noise_Filtered\\{output_filename}_fft_filtered.wav",
                      sample_rate=44100, data=reduced_noise)
-        return reduced_noise
+        return f"{output_filename}_NR_filtered.wav"            
 
 # noise_reduced = NoiseReduce()
 
