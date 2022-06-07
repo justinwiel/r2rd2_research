@@ -14,12 +14,11 @@ from write_to_wav import write_to_wav
 
 class NoiseReduce:
     def reduce_noise(self, wav_loc):
-        audio_file, rate = sf.read(wav_loc)
-        reduced_noise = nr.reduce_noise(y=audio_file, sr=rate,
-                                        n_std_thresh_stationary=1.5, stationary=True)
+        audio_file, rate = sf.read(f"src\\Original_With_Noise\\{wav_loc}")
+        reduced_noise = nr.reduce_noise(y=audio_file, sr=rate)
 
         output_filename = wav_loc.partition('.')[0]
-        write_to_wav(f"src\\Output_Noise_Filtered\\{output_filename}_fft_filtered.wav",
+        write_to_wav(f"src\\Output_Noise_Filtered\\{output_filename}_NR_filtered.wav",
                      sample_rate=44100, data=reduced_noise)
         return f"{output_filename}_fft_filtered.wav"
 
