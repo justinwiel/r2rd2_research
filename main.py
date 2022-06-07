@@ -3,6 +3,7 @@ import json
 import matplotlib.pyplot as plt
 import matplotlib
 import numpy as np
+from Noise_reduction import NoiseReduce
 from SpeechAPI import SpeechToText
 from fft_denoise import fft_denoise
 from librosa_mel import *
@@ -45,16 +46,16 @@ class test_data:
 
     #TODO function needs to be implemented 
     #this function reshapes audio files by adding a filter. 
-    def add_filter(self, filter_nmr, wav_loc , noise_loc):
+    def add_filter(self, filter_nmr, wav_loc , noise_loc = None):
         if filter_nmr == 0: #Mel filter
             filter = melFilter()
             new_path = filter.filterMel(wav_loc)
         elif filter_nmr == 1: #scipy denoise
             filter = fft_denoise()
             new_path = filter.removeNoise(wav_loc=wav_loc , noise_loc=noise_loc)
-        else: # python noise reduction
-            filter = None
-            new_path = filter #TODO add filter
+        elif filter_nmr == 2: # python noise reduction
+            filter = NoiseReduce()
+            new_path = filter.reduce_noise(wav_loc= wav_loc )
         return new_path
         
     #this function saves the updated dictionary and saves them in words.json
@@ -99,13 +100,13 @@ for file in list_of_files:
     test.save()
 test.show_results()
 
-# test.api(1, "src\\Original\\sample_male_1.wav")
-# test.evaluate_api()
-# test.save()
-# test.show_results()
+test.api(1, "src\\Original\\sample_male_1.wav")
+test.evaluate_api()
+test.save()
+test.show_results()
 
-# test.reset_file()
-# test.add_noise("sample_male_1.wav")
-# filter = test.add_filter(0, "sample_male_1_noise_café.wav" , "noise_café.wav")
-# print(filter)
+test.reset_file()
+test.add_noise("sample_male_1.wav")
+filter = test.add_filter(0, "sample_male_1_noise_café.wav" , "noise_café.wav")
+print(filter)
 
