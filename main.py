@@ -3,11 +3,13 @@ import json
 import matplotlib.pyplot as plt
 import matplotlib
 import numpy as np
+from Noise_reduction import NoiseReduce
 from SpeechAPI import SpeechToText
 from fft_denoise import fft_denoise
 from librosa_mel import *
 from create_noise import *
 from write_to_wav import write_to_wav
+
 matplotlib.use('TkAgg')
 #class to test and evaluate data 
 class test_data:
@@ -39,22 +41,18 @@ class test_data:
                 self.word_counter+=1
             print(total_correct/self.word_counter *100)
 
-    def add_noise(self, file_path, noise_path):
-        #TODO needs to be implemented
-        pass
-
     #TODO function needs to be implemented 
     #this function reshapes audio files by adding a filter. 
-    def add_filter(self, filter_nmr, wav_loc , noise_loc):
+    def add_filter(self, filter_nmr, wav_loc , noise_loc=None):
         if filter_nmr == 0: #Mel filter
             filter = melFilter()
-            new_path = filter.filterMel(wav_loc)
+            new_path = filter.filterMel(wav_loc=wav_loc)
         elif filter_nmr == 1: #scipy denoise
             filter = fft_denoise()
             new_path = filter.removeNoise(wav_loc=wav_loc , noise_loc=noise_loc)
-        else: # python noise reduction
-            filter = None
-            new_path = filter #TODO add filter
+        elif filter_nmr == 2: # python noise reduction
+            filter = NoiseReduce()
+            new_path = filter.reduce_noise(wav_loc=wav_loc)
         return new_path
         
     #this function saves the updated dictionary and saves them in words.json
@@ -90,11 +88,22 @@ class test_data:
         manager.window.state('zoomed')
         plt.show()
 
+CN = create_noise
 test = test_data()
-list_of_files = os.listdir("src\\Original") #pas aan naar de folder waar de te evalueren files staan
+
 test.reset_file()
-for file in list_of_files:
-    test.api(0, f"src\\Original\\{file}") #pas aan naar de folder waar de te evalueren files staan
+
+## COMMENT IN VOOR NOISE MAKEN EN FILTER TOEPASSEN
+# list_of_files = os.listdir("src\\Original") #pas aan naar de folder waar de te evalueren files staan
+# for file in list_of_files:
+    # file_noise = CN.add_noise_manually(file, 0 , 0)
+    # test.add_filter(1, file , "NO_NOISE.wav")
+
+## COMMENT IN OM API TE EVALUEREN
+list_of_files_noise = os.listdir("src\\Output_Noise_Filtered") #pas aan naar de folder waar de te evalueren files staan
+for file in list_of_files_noise:
+    print(f"---------------------------------------{file}---------------------------------------")
+    test.api(1, f"src\\Output_Noise_Filtered\\{file}") #pas aan naar de folder waar de te evalueren files staan
     test.evaluate_api()
     test.save()
 test.show_results()
@@ -105,7 +114,6 @@ test.show_results()
 # test.show_results()
 
 # test.reset_file()
-# test.add_noise("sample_male_1.wav")
-# filter = test.add_filter(0, "sample_male_1_noise_café.wav" , "noise_café.wav")
+
 # print(filter)
 

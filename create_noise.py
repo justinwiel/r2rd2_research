@@ -7,7 +7,7 @@ from write_to_wav import write_to_wav
 
 class create_noise:
     ## Functies om noise te adden   
-    def add_noise_manually(wav_loc):
+    def add_noise_manually(wav_loc , min_freq , max_freq):
         src_data , src_rate = librosa.load(f"src\\Original\\{wav_loc}")
         def fftnoise(f):
             f = np.array(f, dtype="complex")
