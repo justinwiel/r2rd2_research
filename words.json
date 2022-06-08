@@ -1,6 +1,6 @@
 {
       "alpha": {
-            "rights": 1,
+            "rights": 0,
             "tests": 4
       },
       "bravo": {
@@ -16,7 +16,7 @@
             "tests": 4
       },
       "echo": {
-            "rights": 1,
+            "rights": 0,
             "tests": 4
       },
       "foxtrot": {
@@ -28,7 +28,7 @@
             "tests": 4
       },
       "hotel": {
-            "rights": 1,
+            "rights": 0,
             "tests": 4
       },
       "india": {
@@ -52,7 +52,7 @@
             "tests": 4
       },
       "november": {
-            "rights": 1,
+            "rights": 0,
             "tests": 4
       },
       "oscar": {
@@ -68,7 +68,7 @@
             "tests": 4
       },
       "romeo": {
-            "rights": 2,
+            "rights": 0,
             "tests": 4
       },
       "sierra": {
@@ -92,11 +92,11 @@
             "tests": 4
       },
       "x-ray": {
-            "rights": 0,
+            "rights": 1,
             "tests": 4
       },
       "yankee": {
-            "rights": 0,
+            "rights": 1,
             "tests": 4
       },
       "zulu": {
