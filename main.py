@@ -94,37 +94,49 @@ test = test_data()
 test.reset_file()
 
 ## COMMENT IN VOOR NOISE MAKEN EN FILTER TOEPASSEN
-list_of_files = os.listdir("src\\Original") #pas aan naar de folder waar de te evalueren files staan
-for file in list_of_files:
-    # file_noise = CN.add_noise_manually(file, 0 , 0)
-    test.add_filter(2, file )
+# list_of_files = os.listdir("src\\Original") #pas aan naar de folder waar de te evalueren files staan
+# for file in list_of_files:
+#     file_noise = CN.add_noise_through_file(file, "noise_café.wav")
+#     test.add_filter(1, file_noise , "noise_café.wav")
 
-## COMMENT IN OM API TE EVALUEREN
+# COMMENT IN OM API TE EVALUEREN
 
-## EVALUEER VOOR MANNEN EN VROUWEN
-# list_of_files_noise = os.listdir("src\\Output_Noise_Filtered") #pas aan naar de folder waar de te evalueren files staan
-# for file in list_of_files_noise:
-#     print(f"---------------------------------------{file}---------------------------------------")
-#     test.api(1, f"src\\Output_Noise_Filtered\\{file}") #pas aan naar de folder waar de te evalueren files staan
-#     test.evaluate_api()
-#     test.save()
+# EVALUEER VOOR MANNEN EN VROUWEN
+list_of_files_noise = os.listdir("src\\Output_Noise_Filtered") #pas aan naar de folder waar de te evalueren files staan
+for file in list_of_files_noise:
+    print(f"---------------------------------------{file}---------------------------------------")
+    test.api(1, f"src\\Output_Noise_Filtered\\{file}") #pas aan naar de folder waar de te evalueren files staan
+    test.evaluate_api()
+    test.save()
 # test.show_results()
 
-## EVALUEER VOOR VROUWEN
-# list_of_files_noise = os.listdir("src\\Output_Noise_Filtered") #pas aan naar de folder waar de te evalueren files staan
+# # test.reset_file()
+
+# # # EVALUEER VOOR VROUWEN
 # for file in list_of_files_noise[:5]:
 #     print(f"---------------------------------------{file}---------------------------------------")
 #     test.api(1, f"src\\Output_Noise_Filtered\\{file}") #pas aan naar de folder waar de te evalueren files staan
 #     test.evaluate_api()
 #     test.save()
+
+
 # test.show_results()
 
-## EVALUEER VOOR MANNEN
+# # test.reset_file()
+
+# # EVALUEER VOOR MANNEN
 # for file in list_of_files_noise[5:]:
 #     print(f"---------------------------------------{file}---------------------------------------")
 #     test.api(1, f"src\\Output_Noise_Filtered\\{file}") #pas aan naar de folder waar de te evalueren files staan
 #     test.evaluate_api()
 #     test.save()
+
+# file = open("words.json")
+# data = json.load(file)    
+# for key, value in data.items():
+#         value["tests"] = 10   
+# file = open("words.json", "w")
+# json.dump(data, file, indent=6) 
 # test.show_results()
 
 
@@ -133,10 +145,10 @@ for file in list_of_files:
 
 
 
-test.api(1, "src\\Original\\sample_male_1.wav")
-test.evaluate_api()
-test.save()
-test.show_results()
+# test.api(1, "src\\Original\\sample_male_1.wav")
+# test.evaluate_api()
+# test.save()
+# test.show_results()
 
 # test.reset_file()
 
