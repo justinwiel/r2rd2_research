@@ -10,13 +10,13 @@ class melFilter:
     def __init__(self):
         pass
     
-    def filterMel(self,*,path):
-        self.y, sampling_rate = librosa.load(f"src\\Original_With_Noise\\{path}")
+    def filterMel(self,*,wav_loc):
+        self.y, sampling_rate = librosa.load(f"src\\Original_With_Noise\\{wav_loc}")
         self.org = copy.deepcopy(self.y)
         self.Spectogram = librosa.feature.melspectrogram(y=self.y)
         self.SpectogramFilt = librosa.feature.melspectrogram(y=self.y, sr=sampling_rate,n_fft=2048, n_mels=128, fmax=sampling_rate/2,  norm="slaney",power=4.3)
         self.y = librosa.feature.inverse.mel_to_audio(self.SpectogramFilt,sr=sampling_rate,n_fft=2048, fmax=sampling_rate/2,  norm="slaney")
-        output_filename = path.partition('.')[0]
+        output_filename = wav_loc.partition('.')[0]
         write(file= f"src\\Output_Noise_Filtered\\{output_filename}_mel_filtered.wav",data =self.y*0.25,samplerate=sampling_rate)
         return f"{output_filename}_fft_filtered.wav"    
 
